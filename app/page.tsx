@@ -1,65 +1,151 @@
-import Image from "next/image";
+﻿"use client";
+
+import { motion } from "framer-motion";
+import { Github, Mail, Phone, ExternalLink, Download } from "lucide-react";
+import ThemeToggle from "./components/ThemeToggle";
+
+function ProjectCard({ title, desc, github, live }: any) {
+  return (
+    <motion.div
+      whileHover={{ y: -8 }}
+      className="p-6 rounded-2xl bg-white/5 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow"
+    >
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">{desc}</p>
+
+      <div className="flex justify-between mt-4 text-sm">
+        <a href={github} target="_blank" className="flex items-center gap-1 hover:underline">
+          <Github size={16}/> Code
+        </a>
+        <a href={live} target="_blank" className="flex items-center gap-1 hover:underline">
+          <ExternalLink size={16}/> Live
+        </a>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Home() {
+  const skills = [
+    "C++",
+    "JavaScript",
+    "Next.js",
+    "Node.js",
+    "MongoDB",
+    "Express.js",
+    "DSA",
+    "Git & GitHub",
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="min-h-screen px-6 md:px-20 py-16">
+      <ThemeToggle />
+
+      {/* HERO */}
+      <section className="text-center space-y-6">
+        <motion.h1
+          initial={{ opacity: 0, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-5xl md:text-7xl font-bold"
+        >
+          Joydeep Gharami
+        </motion.h1>
+
+        <p className="text-lg text-gray-600 dark:text-gray-400">
+          Full Stack Developer | B.Tech CSE 2027 | IIIT Sonepat
+        </p>
+
+        <p className="max-w-2xl mx-auto text-gray-500 dark:text-gray-400">
+          Building scalable web applications and solving real-world problems
+          with strong foundations in Data Structures & Algorithms.
+        </p>
+
+        {/* Buttons */}
+        <div className="flex justify-center gap-4 mt-4">
+          <a
+            href="https://github.com/Joydeep663-2003"
+            target="_blank"
+            className="px-6 py-3 rounded-xl bg-black text-white dark:bg-white dark:text-black"
+          >
+            View GitHub
+          </a>
+
+          <a
+            href="/resume.pdf"
+            download
+            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-black dark:border-white"
+          >
+            <Download size={18} />
+            Download Resume
+          </a>
+        </div>
+      </section>
+
+      {/* SKILLS */}
+      <section className="mt-20">
+        <h2 className="text-3xl font-semibold text-center mb-8">Tech Stack</h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {skills.map((skill) => (
+            <motion.div
+              key={skill}
+              whileHover={{ scale: 1.08 }}
+              className="p-6 text-center rounded-xl bg-gray-100 dark:bg-gray-900"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              {skill}
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* PROJECTS */}
+      <section className="mt-24">
+        <h2 className="text-3xl font-semibold text-center mb-10">Projects</h2>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          <ProjectCard
+            title="E-Commerce Platform"
+            desc="Full-stack e-commerce app with product management and cart."
+            github="https://github.com/Joydeep663-2003/E-Commerce-"
+            live="https://e-commerce-xi-jade.vercel.app/"
+          />
+
+          <ProjectCard
+            title="YouTube Clone"
+            desc="Modern video streaming UI clone with responsive design."
+            github="https://github.com/Joydeep663-2003/Youtube-clone"
+            live="https://youtube-clone-pi-amber.vercel.app/"
+          />
+
+          <ProjectCard
+            title="Quick Sign"
+            desc="Digital document signing platform with secure auth."
+            github="https://github.com/Joydeep663-2003/quick-sign"
+            live="https://quick-sign-murex.vercel.app/"
+          />
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section className="mt-24 text-center space-y-4">
+        <h2 className="text-3xl font-semibold">Contact</h2>
+
+        <div className="flex flex-col items-center gap-3 text-gray-600 dark:text-gray-400">
+          <p className="flex items-center gap-2">
+            <Mail size={18}/> joydeepgharami@gmail.com
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+          <p className="flex items-center gap-2">
+            <Phone size={18}/> +91 8017197514
+          </p>
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://github.com/Joydeep663-2003"
             target="_blank"
-            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:underline"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+            <Github size={18}/> GitHub Profile
           </a>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
